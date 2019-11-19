@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { History } from 'history';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import './menu-item.styles.scss';
 
@@ -8,8 +7,6 @@ interface Props extends RouteComponentProps {
   imageUrl: string;
   size?: string;
   linkUrl: string;
-  history: History;
-  match: any;
 };
 
 const MenuItem = (props: Props) => (
