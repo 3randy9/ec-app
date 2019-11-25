@@ -9,7 +9,7 @@ interface Props extends RouteComponentProps {
   linkUrl: string;
 };
 
-const MenuItem = (props: Props) => (
+const MenuItem: React.FC<Props> = (props) => (
   <li
     className={`${props.size} menu-item`}
     onClick={() => props.history.push(`${props.match.url}${props.linkUrl}`)}
