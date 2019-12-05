@@ -1,8 +1,16 @@
 import * as React from 'react';
-import './sign-in-and-sign-up.styles.scss';
+import './sign-in.styles.scss';
+import FormInput from '../form-input/form-input.component';
+
+type State = {
+  email: string;
+  password: string;
+};
 
 class SignIn extends React.Component {
-  constructor(props) {
+  state: State;
+
+  constructor(props: any) {
     super(props);
 
     this.state = {
@@ -11,14 +19,14 @@ class SignIn extends React.Component {
     };
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.MouseEvent<EventTarget>) => {
     e.preventDefault();
     this.setState({ email: '', password: '' });
   };
 
-  handleChange = e => {
-    const { value, name } = event.target;
-    this.setState({[name]: value})
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    this.setState({ [name]: value });
   };
 
   render() {
@@ -28,22 +36,22 @@ class SignIn extends React.Component {
         <p>Sign in with your email and password</p>
 
         <form>
-          <input
+          <FormInput
             type="email"
             id="email"
             value={this.state.email}
             required
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
+            label="email"
           />
-          <label htmlFor="email">EMAIL</label>
-          <input
+          <FormInput
             type="password"
             id="password"
             value={this.state.password}
             required
-            onChange={this.handleChange}
+            handleChange={this.handleChange}
+            label="password"
           />
-          <label htmlFor="password">PASSWORD</label>
           <button className="submit" onClick={this.handleSubmit}>
             Submit Form
           </button>
