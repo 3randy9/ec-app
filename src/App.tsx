@@ -6,9 +6,14 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import './App.css';
 import { auth } from './firebase/firebase.utils';
-import { Unsubscribe } from 'firebase';
+import { Unsubscribe, User } from 'firebase';
+
+interface State {
+  currentUser: User | null;
+}
 
 class App extends React.Component {
+  state: State;
   constructor(props: any) {
     super(props);
 
@@ -28,13 +33,13 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-      this.setState({ currentUser: null });
+    this.setState({ currentUser: null });
   }
 
   render() {
     return (
       <>
-        <Header />
+        <Header currentUser={this.state.currentUser} />
         <main>
           <Switch>
             <Route exact path="/" component={Home} />
