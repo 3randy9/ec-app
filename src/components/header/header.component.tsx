@@ -9,6 +9,10 @@ interface Props {
   currentUser: User | null;
 }
 
+const signOut = () => {
+  auth.signOut();
+}
+
 const Header = ({ currentUser }: Props) => (
   <header className="header">
     <Link to="/" className="logo-container">
@@ -22,8 +26,8 @@ const Header = ({ currentUser }: Props) => (
         <Link to="/contact">CONTACT</Link>
       </li>
       {currentUser ? (
-        <li className="option" onClick={() => auth.signOut()}>
-          SIGN OUT
+        <li className="option">
+          <button onClick={signOut}>SIGN OUT</button>
         </li>
       ) : (
         <Link className="option" to="/signin">
