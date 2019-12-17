@@ -5,8 +5,9 @@ type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   value: string;
-  type: string;
+  type: 'text' | 'email' | 'password';
   id: string;
+  name?: string;
   required?: boolean;
 };
 
