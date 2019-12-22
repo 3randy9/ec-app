@@ -35,7 +35,6 @@ class SignIn extends React.Component {
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     this.setState({ [name]: value });
-    console.log("TCL: SignIn -> handleChange -> this.state", this.state)
   };
 
   render() {

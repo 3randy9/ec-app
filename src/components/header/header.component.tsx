@@ -7,10 +7,6 @@ import { auth } from '../../firebase/firebase.utils';
 import { UserState } from '../../redux/user/types';
 import { RootState } from '../../redux/types';
 
-const signOut = () => {
-  auth.signOut();
-};
-
 const Header = ({ currentUser }: UserState) => (
   <header className="header">
     <Link to="/" className="logo-container">
@@ -25,7 +21,13 @@ const Header = ({ currentUser }: UserState) => (
       </li>
       {currentUser ? (
         <li className="option">
-          <button onClick={signOut}>SIGN OUT</button>
+          <button
+            onClick={() => {
+              auth.signOut();
+            }}
+          >
+            SIGN OUT
+          </button>
         </li>
       ) : (
         <Link className="option" to="/signin">
