@@ -22,7 +22,7 @@ export interface AddCartItems {
 
 export interface CartState {
   hidden: boolean;
-  cartItems: Item[] | [];
+  cartItems: Item[];
 }
 
 export type CartActionTypes = SetCartIconFlag;
