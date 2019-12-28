@@ -11,8 +11,8 @@ const PreviewCollection: React.FC<Props> = props => (
     <ul className="preview">
       {props.items
         .filter((item, i) => i < 4)
-        .map(({id, ...itemProps}) => (
-          <CollectionItem key={id} {...itemProps} />
+        .map(item => (
+          <CollectionItem key={item.id} item={item} />
         ))}
     </ul>
   </section>

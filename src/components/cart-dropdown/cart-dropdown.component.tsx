@@ -3,7 +3,7 @@ import './cart-dropdown.styles.scss';
 import CustomButton from '../custom-button/custom-button.component';
 
 const CartDropdown: React.FC = () => (
-  <div className="cart-dropdown">
+  <div id="cart-dropdown" className="cart-dropdown">
     <ul className="cart-items">
       <li></li>
     </ul>

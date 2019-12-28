@@ -1,13 +1,7 @@
 import * as React from 'react';
 import SHOP_DATA from './shop.data';
+import { Item } from "../../redux/cart/types";
 import PreviewCollection from '../../components/preview-collection/preview-collection.component';
-
-export type Item = {
-  id?: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-};
 
 export type Collection = {
   id?: number;

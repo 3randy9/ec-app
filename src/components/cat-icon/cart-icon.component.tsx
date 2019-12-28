@@ -2,13 +2,20 @@ import * as React from 'react';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 import { connect } from 'react-redux';
 import { toggleCartHidden } from '../../redux/cart/cart.action';
+import { Dispatch } from 'redux';
+import { SetCartIconFlag } from '../../redux/cart/types';
+import { RootState } from '../../redux/types';
 import './cart-icon.styles.scss';
 
-const CartIcon: React.FC = ({ toggleCartHidden, hidden }: any) => (
+const CartIcon: React.FC<{
+  toggleCartHidden: () => SetCartIconFlag;
+  hidden: boolean;
+}> = ({ toggleCartHidden, hidden }) => (
   <button
     className="cart-icon"
     aria-haspopup="true"
     aria-expanded={hidden}
+    aria-controls="cart-dropdown"
     onClick={toggleCartHidden}
   >
     <ShoppingIcon className="shopping-icon" />
@@ -18,11 +25,11 @@ const CartIcon: React.FC = ({ toggleCartHidden, hidden }: any) => (
   </button>
 );
 
-const mapStateToProps = ({ cart: { hidden } }: any) => ({
+const mapStateToProps = ({ cart: { hidden } }: RootState) => ({
   hidden
 });
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch<SetCartIconFlag>) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 

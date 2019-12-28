@@ -7,7 +7,7 @@ import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import CartIcon from '../cat-icon/cart-icon.component';
 import { auth } from '../../firebase/firebase.utils';
 import { UserState } from '../../redux/user/types';
-// import { RootState } from '../../redux/types';
+import { RootState } from '../../redux/types';
 
 const Header: React.FC<UserState> = ({ currentUser, hidden }: any) => (
   <header className="header">
@@ -38,11 +38,14 @@ const Header: React.FC<UserState> = ({ currentUser, hidden }: any) => (
       )}
       <CartIcon />
     </ul>
-    {hidden ? <CartDropDown /> : null}
+    {hidden ? null : <CartDropDown />}
   </header>
 );
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }: any) => ({
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { hidden }
+}: RootState) => ({
   currentUser,
   hidden
 });
