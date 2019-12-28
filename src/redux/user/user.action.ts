@@ -1,7 +1,7 @@
 import { User } from 'firebase';
-import { SET_CURRENT_USER } from './types';
+import { UserActionTypes } from './types';
 
 export const setCurrentUser = (user: User) => ({
-  type: SET_CURRENT_USER,
+  type: UserActionTypes.SET_CURRENT_USER,
   payload: user
 });

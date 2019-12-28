@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
+import CartDropDown from '../cart-dropdown/cart-dropdown.component';
+import CartIcon from '../cat-icon/cart-icon.component';
 import { auth } from '../../firebase/firebase.utils';
 import { UserState } from '../../redux/user/types';
-import { RootState } from '../../redux/types';
+// import { RootState } from '../../redux/types';
 
-const Header = ({ currentUser }: UserState) => (
+const Header: React.FC<UserState> = ({ currentUser, hidden }: any) => (
   <header className="header">
     <Link to="/" className="logo-container">
       <Logo className="logo" />
@@ -34,12 +36,15 @@ const Header = ({ currentUser }: UserState) => (
           SIGN IN
         </Link>
       )}
+      <CartIcon />
     </ul>
+    {hidden ? <CartDropDown /> : null}
   </header>
 );
 
-const mapStateToProps = (state: RootState) => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }: any) => ({
+  currentUser,
+  hidden
 });
 
 export default connect(mapStateToProps)(Header);
