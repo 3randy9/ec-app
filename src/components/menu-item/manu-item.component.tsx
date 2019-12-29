@@ -7,24 +7,33 @@ interface Props extends RouteComponentProps {
   imageUrl: string;
   size?: string;
   linkUrl: string;
-};
+}
 
-const MenuItem: React.FC<Props> = (props) => (
-  <li
-    className={`${props.size} menu-item`}
-    onClick={() => props.history.push(`${props.match.url}${props.linkUrl}`)}
-  >
-    <div
-      className="background-image"
-      style={{
-        backgroundImage: `url(${props.imageUrl})`
-      }}
-    ></div>
-    <div className="menu-item_content">
-      <h2 className="title">{props.title.toUpperCase()}</h2>
-      <span className="subtitle">SHOP NOW</span>
-    </div>
-  </li>
-);
+const MenuItem: React.FC<Props> = props => {
+  const handleClickRooter = () => {
+    props.history.push(`${props.match.url}${props.linkUrl}`)
+  }
+
+  return (
+    <li
+      role="button"
+      className={`${props.size} menu-item`}
+      onClick={handleClickRooter}
+      onKeyPress={handleClickRooter}
+      tabIndex={0}
+    >
+      <div
+        className="background-image"
+        style={{
+          backgroundImage: `url(${props.imageUrl})`
+        }}
+      ></div>
+      <div className="menu-item_content">
+        <h2 className="title">{props.title.toUpperCase()}</h2>
+        <span className="subtitle">SHOP NOW</span>
+      </div>
+    </li>
+  );
+};
 
 export default withRouter(MenuItem);
