@@ -22,7 +22,7 @@ class ShopPage extends React.Component<State> {
 
     this.state = {
       collections: SHOP_DATA
-    };
+    } as any;
   }
 
   render() {
