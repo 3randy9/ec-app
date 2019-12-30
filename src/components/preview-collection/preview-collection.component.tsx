@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import './preview-collection.style.scss';
-import { Collection } from '../../pages/shop/shop.component';
+import { Collection } from '../../redux/shop/types';
 import CollectionItem from '../collection-item/collection-item.component'
 
 type Props = Collection

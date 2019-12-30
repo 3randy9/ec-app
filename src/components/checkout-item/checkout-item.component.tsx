@@ -14,11 +14,13 @@ import {
 } from '../../redux/cart/types';
 import './checkout-item.styles.scss';
 
+type HandleClick = (item: Item) => void;
+
 type Props = {
   cartItem: Item;
-  clearItem?: (item: Item) => Dispatch<ClearItemFromCart>;
-  addItem?: (item: Item) => Dispatch<AddCartItems>;
-  removeItem?: (item: Item) => Dispatch<RemoveItems>;
+  clearItem: HandleClick;
+  addItem: HandleClick;
+  removeItem: HandleClick;
 };
 
 const CheckoutItem: React.FC<Props> = ({
@@ -28,18 +30,9 @@ const CheckoutItem: React.FC<Props> = ({
   removeItem
 }) => {
   const { name, price, imageUrl, quantity } = cartItem;
-  const handleClickClearItem = () => {
-    if (clearItem === undefined) return;
-    clearItem(cartItem);
-  };
-  const handleClickAddItem = () => {
-    if (addItem === undefined) return;
-    addItem(cartItem);
-  };
-  const handleClickRemoveItem = () => {
-    if (removeItem === undefined) return;
-    removeItem(cartItem);
-  };
+  const handleClickClearItem = () => clearItem(cartItem);
+  const handleClickAddItem = () => addItem(cartItem);
+  const handleClickRemoveItem = () => removeItem(cartItem);
 
   return (
     <ul className="checkout-item">
@@ -70,11 +63,12 @@ const CheckoutItem: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) =>
-  ({
-    clearItem: (item: Item) => dispatch(clearItemFromCart(item)),
-    addItem: (item: Item) => dispatch(addItem(item)),
-    removeItem: (item: Item) => dispatch(removeItem(item))
-  } as any);
+const mapDispatchToProps = (
+  dispatch: Dispatch<ClearItemFromCart | AddCartItems | RemoveItems>
+) => ({
+  clearItem: (item: Item) => dispatch(clearItemFromCart(item)),
+  addItem: (item: Item) => dispatch(addItem(item)),
+  removeItem: (item: Item) => dispatch(removeItem(item))
+});
 
 export default connect(null, mapDispatchToProps)(CheckoutItem);

@@ -11,11 +11,11 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { auth } from '../../firebase/firebase.utils';
 import { UserState } from '../../redux/user/types';
 import { CartState } from '../../redux/cart/types';
-// import { RootState } from '../../redux/types';
+import { RootState } from '../../redux/types';
 
-type Props = Pick<UserState, 'currentUser'> & Pick<CartState, 'hidden'>
+type Props = Pick<UserState, 'currentUser'> & Pick<CartState, 'hidden'>;
 
-const Header: React.FC<any> = ({ currentUser, hidden }: Props) => (
+const Header: React.FC<Props> = ({ currentUser, hidden }) => (
   <header className="header">
     <Link to="/" className="logo-container">
       <Logo className="logo" />
@@ -48,9 +48,9 @@ const Header: React.FC<any> = ({ currentUser, hidden }: Props) => (
   </header>
 );
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector<RootState, Props>({
   currentUser: selectCurrentUser,
   hidden: selectCartHidden
-} as any);
+});
 
 export default connect(mapStateToProps)(Header);

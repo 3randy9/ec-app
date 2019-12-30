@@ -1,77 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import MenuItem from '../menu-item/manu-item.component';
+import { createStructuredSelector } from 'reselect';
+import { selectDirectorySections } from '../../redux/directory/directory.selectors';
+import { Section, DirectoryState } from '../../redux/directory/types';
+import { RootState } from '../../redux/types';
 import './directory.styles.scss';
 
-type Props = {};
+const Directory: React.FC<DirectoryState> = ({ sections }) => (
+  <nav className="menu">
+    <ul className="menu-items">
+      {sections.map(({ id, ...sectionProps }) => (
+        <MenuItem key={id} {...sectionProps} />
+      ))}
+    </ul>
+  </nav>
+);
 
-type Section = {
-  title: string;
-  imageUrl: string;
-  id: number;
-  linkUrl: string;
-  size?: string;
-};
+const mapStateToProps = createStructuredSelector<
+  RootState,
+  { sections: Section[] }
+>({
+  sections: selectDirectorySections
+});
 
-type State = {
-  sections: Section[];
-};
-
-class Directory extends React.Component<Props, State> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      sections: [
-        {
-          title: 'hats',
-          imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-          id: 1,
-          linkUrl: 'shop/hats'
-        },
-        {
-          title: 'jackets',
-          imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-          id: 2,
-          linkUrl: 'shop/jackets'
-        },
-        {
-          title: 'sneakers',
-          imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-          id: 3,
-          linkUrl: 'shop/sneakers'
-        },
-        {
-          title: 'womens',
-          imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-          size: 'large',
-          id: 4,
-          linkUrl: 'shop/womens'
-        },
-        {
-          title: 'mens',
-          imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-          size: 'large',
-          id: 5,
-          linkUrl: 'shop/mens'
-        }
-      ]
-    };
-  }
-
-  render() {
-    return (
-      <nav className="menu">
-        <ul className="menu-items">
-          {this.state.sections.map(({id, ...sectionProps}) => (
-            <MenuItem
-              key={id}
-              {...sectionProps}
-            />
-          ))}
-        </ul>
-      </nav>
-    );
-  }
-}
-
-export default Directory;
+export default connect(mapStateToProps)(Directory);

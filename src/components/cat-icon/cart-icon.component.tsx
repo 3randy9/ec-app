@@ -7,16 +7,16 @@ import {
   selectCartHidden
 } from '../../redux/cart/cart.selectors';
 import { Dispatch } from 'redux';
+import { RootState } from '../../redux/types';
 import { SetCartIconFlag } from '../../redux/cart/types';
 import { createStructuredSelector } from 'reselect';
 import './cart-icon.styles.scss';
 
-const CartIcon: React.FC<
-  // toggleCartHidden: () => SetCartIconFlag;
-  // hidden: boolean;
-  // itemCount: number;
-  any
-> = ({ toggleCartHidden, hidden, itemCount }) => (
+const CartIcon: React.FC<{
+  toggleCartHidden: () => SetCartIconFlag;
+  hidden: boolean;
+  itemCount: number;
+}> = ({ toggleCartHidden, hidden, itemCount }) => (
   <button
     className="cart-icon"
     aria-haspopup="true"
@@ -31,10 +31,16 @@ const CartIcon: React.FC<
   </button>
 );
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector<
+  RootState,
+  {
+    hidden: boolean;
+    itemCount: number;
+  }
+>({
   hidden: selectCartHidden,
   itemCount: selectCartItemsCount
-} as any);
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<SetCartIconFlag>) => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())

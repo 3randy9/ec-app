@@ -8,6 +8,7 @@ import {
 import { Item } from '../../redux/cart/types';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import './checkout.styles.scss';
+import { RootState } from '../../redux/types';
 
 const CheckoutPage: React.FC<{ cartItems: Item[]; total: number }> = ({
   cartItems,
@@ -40,9 +41,12 @@ const CheckoutPage: React.FC<{ cartItems: Item[]; total: number }> = ({
   </div>
 );
 
-const mapStateToProps = createStructuredSelector({
+const mapStateToProps = createStructuredSelector<
+  RootState,
+  { cartItems: Item[]; total: number }
+>({
   cartItems: selectCartItems,
   total: selectCartTotal
-} as any);
+});
 
 export default connect(mapStateToProps)(CheckoutPage);
