@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { CustomButtonContainer } from './custom-button.styles';
 
 type Props = {
   onClick: (e: React.MouseEvent<EventTarget>) => void;
   type: 'button' | 'submit';
-  isGoogleSignIn?: 'google-sign-in';
-  inverted?: 'inverted';
+  isGoogleSignIn?: boolean;
+  inverted?: boolean;
   tabIndex?: -1 | 0;
 };
 

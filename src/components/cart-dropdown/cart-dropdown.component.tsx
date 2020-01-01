@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { Dispatch } from 'redux';
-import './cart-dropdown.styles.scss';
+import {
+  CartDropdownContainer,
+  CartItems,
+  EmptyMessage,
+  CheckoutButton
+} from './cart-dropdown.styles';
 import CartItem from '../cart-item/cart-item.component';
-import CustomButton from '../custom-button/custom-button.component';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../redux/types';
 import { Item, CartState } from '../../redux/cart/types';
@@ -23,20 +26,20 @@ const CartDropdown: React.FC<Props> = ({ cartItems, history, dispatch }) => {
   };
 
   return (
-    <div id="cart-dropdown" className="cart-dropdown">
+    <CartDropdownContainer id="cart-dropdown">
       {cartItems.length ? (
-        <ul className="cart-items">
+        <CartItems>
           {cartItems.map(cartItem => (
             <CartItem key={cartItem.id} item={cartItem} />
           ))}
-        </ul>
+        </CartItems>
       ) : (
-        <p className="empty-message">Your cart is empty</p>
+        <EmptyMessage>Your cart is empty</EmptyMessage>
       )}
-      <CustomButton type="button" onClick={handleClick}>
+      <CheckoutButton type="button" onClick={handleClick}>
         GO TO CHECKOUT
-      </CustomButton>
-    </div>
+      </CheckoutButton>
+    </CartDropdownContainer>
   );
 };
 

@@ -1,36 +1,38 @@
-import * as React from 'react';
+import React from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import './collection-item.styles.scss';
+import {
+  CollectionItemContainer,
+  CollectionFooter,
+  CollectionImage,
+  AddToCartButton
+} from './collection-item.styles';
 import { Item, AddCartItems } from '../../redux/cart/types';
 import { addItem } from '../../redux/cart/cart.action';
-import CustomButton from '../custom-button/custom-button.component';
 
-type Props = {
+const CollectionItem: React.FC<{
   item: Item;
   addItem: (item: Item) => void;
-};
-
-const CollectionItem: React.FC<Props> = ({ item, addItem }) => {
+}> = ({ item, addItem }) => {
   const { name, price, imageUrl } = item;
   const clickHandle = () => addItem(item);
 
   return (
-    <li className="collection-item" tabIndex={0}>
-      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
-      <p className="collection-footer">
+    <CollectionItemContainer tabIndex={0}>
+      <CollectionImage className="image" imageUrl={imageUrl} />
+      <CollectionFooter>
         <span className="name">{name}</span>
         <span className="price">{price}</span>
-      </p>
-      <CustomButton
+      </CollectionFooter>
+      <AddToCartButton
         type="button"
         onClick={clickHandle}
-        inverted="inverted"
+        inverted
         tabIndex={0}
       >
         Add to cart
-      </CustomButton>
-    </li>
+      </AddToCartButton>
+    </CollectionItemContainer>
   );
 };
 

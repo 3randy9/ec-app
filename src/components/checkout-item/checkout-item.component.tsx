@@ -12,7 +12,13 @@ import {
   RemoveItems,
   Item
 } from '../../redux/cart/types';
-import './checkout-item.styles.scss';
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  ItemContainer,
+  ItemQuantityContainer,
+  RemoveButton
+} from './checkout-item.styles';
 
 type HandleClick = (item: Item) => void;
 
@@ -35,12 +41,12 @@ const CheckoutItem: React.FC<Props> = ({
   const handleClickRemoveItem = () => removeItem(cartItem);
 
   return (
-    <ul className="checkout-item">
-      <li className="image-container">
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </li>
-      <li className="name">{name}</li>
-      <li className="quantity">
+      </ImageContainer>
+      <ItemContainer>{name}</ItemContainer>
+      <ItemQuantityContainer>
         <button className="arrow" onClick={handleClickRemoveItem}>
           &#10094;
         </button>
@@ -48,18 +54,18 @@ const CheckoutItem: React.FC<Props> = ({
         <button className="arrow" onClick={handleClickAddItem}>
           &#10095;
         </button>
-      </li>
-      <li className="price">{price}</li>
+      </ItemQuantityContainer>
+      <ItemContainer>{price}</ItemContainer>
       <li>
-        <button
+        <RemoveButton
           className="remove-button"
           onClick={handleClickClearItem}
           aria-label="Remove Button"
         >
           &#10005;
-        </button>
+        </RemoveButton>
       </li>
-    </ul>
+    </CheckoutItemContainer>
   );
 };
 

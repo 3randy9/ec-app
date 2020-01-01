@@ -10,25 +10,22 @@ import { Dispatch } from 'redux';
 import { RootState } from '../../redux/types';
 import { SetCartIconFlag } from '../../redux/cart/types';
 import { createStructuredSelector } from 'reselect';
-import './cart-icon.styles.scss';
+import { CartIconContainer, ItemCount } from './cart-icon.styles';
 
 const CartIcon: React.FC<{
   toggleCartHidden: () => SetCartIconFlag;
   hidden: boolean;
   itemCount: number;
 }> = ({ toggleCartHidden, hidden, itemCount }) => (
-  <button
-    className="cart-icon"
+  <CartIconContainer
     aria-haspopup="true"
     aria-expanded={hidden}
     aria-controls="cart-dropdown"
     onClick={toggleCartHidden}
   >
     <ShoppingIcon className="shopping-icon" />
-    <span className="item-count" aria-label="cart items count">
-      {itemCount}
-    </span>
-  </button>
+    <ItemCount aria-label="cart items count">{itemCount}</ItemCount>
+  </CartIconContainer>
 );
 
 const mapStateToProps = createStructuredSelector<
