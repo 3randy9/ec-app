@@ -1,7 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLi,
+  OptionLink,
+  OptionButton
+} from './header.styles';
 import { connect } from 'react-redux';
-import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import CartDropDown from '../cart-dropdown/cart-dropdown.component';
 import CartIcon from '../cat-icon/cart-icon.component';
@@ -16,36 +23,34 @@ import { RootState } from '../../redux/types';
 type Props = Pick<UserState, 'currentUser'> & Pick<CartState, 'hidden'>;
 
 const Header: React.FC<Props> = ({ currentUser, hidden }) => (
-  <header className="header">
-    <Link to="/" className="logo-container">
+  <HeaderContainer>
+    <LogoContainer to="/">
       <Logo className="logo" />
-    </Link>
-    <ul className="options">
-      <li className="option">
+    </LogoContainer>
+    <OptionsContainer>
+      <OptionLi>
         <Link to="/shop">SHOP</Link>
-      </li>
-      <li className="option">
+      </OptionLi>
+      <OptionLi>
         <Link to="/contact">CONTACT</Link>
-      </li>
+      </OptionLi>
       {currentUser ? (
-        <li className="option">
-          <button
+        <OptionLi>
+          <OptionButton
             onClick={() => {
               auth.signOut();
             }}
           >
             SIGN OUT
-          </button>
-        </li>
+          </OptionButton>
+        </OptionLi>
       ) : (
-        <Link className="option" to="/signin">
-          SIGN IN
-        </Link>
+        <OptionLink to="/signin">SIGN IN</OptionLink>
       )}
       <CartIcon />
-    </ul>
+    </OptionsContainer>
     {hidden ? null : <CartDropDown />}
-  </header>
+  </HeaderContainer>
 );
 
 const mapStateToProps = createStructuredSelector<RootState, Props>({

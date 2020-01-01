@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './custom-button.styles.scss';
+import { CustomButtonContainer } from './custom-button.styles';
 
 type Props = {
   onClick: (e: React.MouseEvent<EventTarget>) => void;
@@ -9,20 +9,8 @@ type Props = {
   tabIndex?: -1 | 0;
 };
 
-const CustomButton: React.FC<Props> = ({
-  children,
-  isGoogleSignIn,
-  inverted,
-  ...otherProps
-}) => (
-  <button
-    className={`${inverted ? 'inverted' : ''} ${
-      isGoogleSignIn ? 'google-sign-in' : ''
-    } custom-button`}
-    {...otherProps}
-  >
-    {children}
-  </button>
+const CustomButton: React.FC<Props> = ({ children, ...props }) => (
+  <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
 );
 
 export default CustomButton;
