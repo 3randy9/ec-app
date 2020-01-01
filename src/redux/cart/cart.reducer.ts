@@ -1,13 +1,13 @@
 import { CartActionTypes, AddCartItems, CartState } from './types';
 import { addItemToCart, removeItemFromCart } from './cart.utils';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: CartState = {
   hidden: true,
   cartItems: []
 };
 
 const cartReducer = (
-  state: CartState = INITIAL_STATE,
+  state = INITIAL_STATE,
   action: AddCartItems
 ) => {
   switch (action.type) {

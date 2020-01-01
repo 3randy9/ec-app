@@ -4,9 +4,8 @@ export interface Section {
   id: number;
   linkUrl: string;
   size?: string;
-};
+}
 
 export interface DirectoryState {
   sections: Section[];
 }
-
