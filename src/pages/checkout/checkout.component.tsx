@@ -7,6 +7,7 @@ import {
 } from '../../redux/cart/cart.selectors';
 import { Item } from '../../redux/cart/types';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
 import './checkout.styles.scss';
 import { RootState } from '../../redux/types';
 
@@ -37,6 +38,14 @@ const CheckoutPage: React.FC<{ cartItems: Item[]; total: number }> = ({
     ))}
     <div className="total">
       <p>TOTAL: ${total}</p>
+      <p className="test-warning">
+        ※Please use the following test redit card for payments
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - CVC: 123
+      </p>
+      <p>
+        <StripeCheckoutButton price={total} />
+      </p>
     </div>
   </div>
 );
