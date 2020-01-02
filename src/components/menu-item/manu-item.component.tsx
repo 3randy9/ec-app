@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import './menu-item.styles.scss';
+import {
+  MenuItemContainer,
+  MenuContent,
+  MenuImage,
+  MenuItemTitle,
+  MenuItemSubTitle
+} from './menu-item.styles';
 
 interface Props extends RouteComponentProps {
   title: string;
@@ -9,30 +15,32 @@ interface Props extends RouteComponentProps {
   linkUrl: string;
 }
 
-const MenuItem: React.FC<Props> = props => {
+const MenuItem: React.FC<Props> = ({
+  title,
+  imageUrl,
+  linkUrl,
+  size,
+  history,
+  match
+}) => {
   const handleClickRooter = () => {
-    props.history.push(`${props.match.url}${props.linkUrl}`)
-  }
+    history.push(`${match.url}${linkUrl}`);
+  };
 
   return (
-    <li
+    <MenuItemContainer
       role="button"
-      className={`${props.size} menu-item`}
+      size={size}
       onClick={handleClickRooter}
       onKeyPress={handleClickRooter}
       tabIndex={0}
     >
-      <div
-        className="background-image"
-        style={{
-          backgroundImage: `url(${props.imageUrl})`
-        }}
-      ></div>
-      <div className="menu-item_content">
-        <h2 className="title">{props.title.toUpperCase()}</h2>
-        <span className="subtitle">SHOP NOW</span>
-      </div>
-    </li>
+      <MenuImage img={imageUrl} />
+      <MenuContent>
+        <MenuItemTitle>{title.toUpperCase()}</MenuItemTitle>
+        <MenuItemSubTitle>SHOP NOW</MenuItemSubTitle>
+      </MenuContent>
+    </MenuItemContainer>
   );
 };
 

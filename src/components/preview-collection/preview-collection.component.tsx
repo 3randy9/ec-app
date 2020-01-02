@@ -1,21 +1,25 @@
 import React from 'react';
-import './preview-collection.style.scss';
+import {
+  PreviewCollectionContaier,
+  PreviewCollectionTitle,
+  PreviewCollectionItems
+} from './preview-collection.style';
 import { Collection } from '../../redux/shop/types';
 import CollectionItem from '../collection-item/collection-item.component';
 
 type Props = Pick<Collection, 'title' | 'items'>;
 
-const PreviewCollection: React.FC<Props> = ({title, items}) => (
-  <section className="preview-collection">
-    <h1 className="title">{title.toUpperCase()}</h1>
-    <ul className="preview">
+const PreviewCollection: React.FC<Props> = ({ title, items }) => (
+  <PreviewCollectionContaier>
+    <PreviewCollectionTitle>{title.toUpperCase()}</PreviewCollectionTitle>
+    <PreviewCollectionItems>
       {items
         .filter((item, i) => i < 4)
         .map(item => (
           <CollectionItem key={item.id} item={item} />
         ))}
-    </ul>
-  </section>
+    </PreviewCollectionItems>
+  </PreviewCollectionContaier>
 );
 
 export default PreviewCollection;

@@ -1,7 +1,7 @@
 import React from 'react';
-import './form-input.styles.scss';
+import { InputField, Input, Label } from './form-input.styles';
 
-type Props = {
+export type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
   value: string;
@@ -11,18 +11,20 @@ type Props = {
   required?: boolean;
 };
 
-const FormInput = ({ handleChange, label, value, ...otherProps }: Props) => (
-  <div className="group">
-    <input className="form-input" onChange={handleChange} {...otherProps} />
+const FormInput: React.FC<Props> = ({
+  handleChange,
+  label,
+  value,
+  ...otherProps
+}) => (
+  <InputField>
+    <Input onChange={handleChange} {...otherProps} />
     {label ? (
-      <label
-        htmlFor={otherProps.id}
-        className={`${value.length ? 'shrink' : ''} form-input-label`}
-      >
+      <Label htmlFor={otherProps.id} value={value.length}>
         {label}
-      </label>
+      </Label>
     ) : null}
-  </div>
+  </InputField>
 );
 
 export default FormInput;

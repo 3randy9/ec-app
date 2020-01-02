@@ -8,46 +8,52 @@ import {
 import { Item } from '../../redux/cart/types';
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
-import './checkout.styles.scss';
+import {
+  CheckoutPageContainer,
+  CheckoutPageHead,
+  CheckoutPageBlock,
+  CheckoutPageTotal,
+  WarningText
+} from './checkout.styles';
 import { RootState } from '../../redux/types';
 
 const CheckoutPage: React.FC<{ cartItems: Item[]; total: number }> = ({
   cartItems,
   total
 }) => (
-  <div className="checkout-page">
-    <ul className="checkout-header">
-      <li className="checkout-block">
+  <CheckoutPageContainer>
+    <CheckoutPageHead>
+      <CheckoutPageBlock>
         <span>Product</span>
-      </li>
-      <li className="checkout-block">
+      </CheckoutPageBlock>
+      <CheckoutPageBlock>
         <span>Description</span>
-      </li>
-      <li className="checkout-block">
+      </CheckoutPageBlock>
+      <CheckoutPageBlock>
         <span>Quantity</span>
-      </li>
-      <li className="checkout-block">
+      </CheckoutPageBlock>
+      <CheckoutPageBlock>
         <span>Price</span>
-      </li>
-      <li className="checkout-block">
+      </CheckoutPageBlock>
+      <CheckoutPageBlock>
         <span>Remove</span>
-      </li>
-    </ul>
+      </CheckoutPageBlock>
+    </CheckoutPageHead>
     {cartItems.map(cartItem => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <div className="total">
+    <CheckoutPageTotal>
       <p>TOTAL: ${total}</p>
-      <p className="test-warning">
+      <WarningText>
         ※Please use the following test redit card for payments
         <br />
         4242 4242 4242 4242 - Exp: 01/20 - CVC: 123
-      </p>
+      </WarningText>
       <p>
         <StripeCheckoutButton price={total} />
       </p>
-    </div>
-  </div>
+    </CheckoutPageTotal>
+  </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector<
