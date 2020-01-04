@@ -1,11 +1,15 @@
-import {Item} from '../cart/types'
+import { Item } from '../cart/types';
+
+export const ShopActionTypes = {
+  UPDATE_COLLECTIONS: 'UPDATE_COLLECTIONS'
+};
 
 export interface Collection {
   id: number;
   title: string;
   routeName: string;
   items: Item[];
-};
+}
 
 export interface Collections {
   [key: string]: Collection;
@@ -18,7 +22,7 @@ export interface Collections {
 
 export interface ShopState {
   collections: Collections;
-};
+}
 
 export interface CollectionIdMap {
   hats: 1;

@@ -16,6 +16,10 @@ import { selectCurrentUser } from './redux/user/user.selectors';
 import { UserState, SetUser } from './redux/user/types';
 import { createStructuredSelector } from 'reselect';
 
+type Props = {
+  setCurrentUser: Dispatch<SetUser>;
+};
+
 class App extends React.Component {
   props: any;
   unSubscribeFromAuth: Unsubscribe | null = null;
