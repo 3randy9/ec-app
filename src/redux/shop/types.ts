@@ -4,6 +4,11 @@ export const ShopActionTypes = {
   UPDATE_COLLECTIONS: 'UPDATE_COLLECTIONS'
 };
 
+export interface UpdateCollections {
+  type: typeof ShopActionTypes.UPDATE_COLLECTIONS;
+  payload: Collections;
+}
+
 export interface Collection {
   id: number;
   title: string;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router-dom';
 import { Unsubscribe } from 'firebase';
@@ -7,6 +8,7 @@ import {
   convertCollectionsSnapshotToMap
 } from '../../firebase/firebase.utils';
 import { updateCollections } from '../../redux/shop/shop.action';
+import { Collection } from '../../redux/shop/types';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
 import CollectionPage from '../collection/collection.component';
 
@@ -38,8 +40,8 @@ class ShopPage extends React.Component<RouteComponentProps> {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  updateCollections: (collectionsMap: any) =>
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  updateCollections: (collectionsMap: Collection) =>
     dispatch(updateCollections(collectionsMap))
 });
 
