@@ -1,12 +1,17 @@
 import { Item } from '../cart/types';
 
 export const ShopActionTypes = {
-  UPDATE_COLLECTIONS: 'UPDATE_COLLECTIONS'
+  FETCH_COLLECTIONS_START: 'FETCH_COLLECTIONS_START',
+  FETCH_COLLECTIONS_SUCCESS: 'FETCH_COLLECTIONS_SUCCESS',
+  FETCH_COLLECTIONS_FAILURE: 'FETCH_COLLECTIONS_FAILURE'
 };
 
-export interface UpdateCollections {
-  type: typeof ShopActionTypes.UPDATE_COLLECTIONS;
-  payload: Collections;
+export interface FetchCollectionsAction {
+  type:
+    | typeof ShopActionTypes.FETCH_COLLECTIONS_START
+    | typeof ShopActionTypes.FETCH_COLLECTIONS_SUCCESS
+    | typeof ShopActionTypes.FETCH_COLLECTIONS_FAILURE;
+  payload?: Collections;
 }
 
 export interface Collection {
@@ -26,7 +31,9 @@ export interface Collections {
 }
 
 export interface ShopState {
-  collections: Collections;
+  collections: Collections | null;
+  isFetching: boolean;
+  errorMessage: string | undefined;
 }
 
 export interface CollectionIdMap {
